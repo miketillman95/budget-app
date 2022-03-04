@@ -1,6 +1,7 @@
 import Userfront from "@userfront/react";
 import {Button, Stack} from 'react-bootstrap'
 import Container from 'react-bootstrap/Container'
+import AddBudgetModal from "../AddBudgetModal";
 import BudgetCard from './BudgetCard'
 
 
@@ -14,6 +15,7 @@ function Dashboard() {
             </div>
     }else {
   return (
+    <>
     <Container className='my-4'>
             <Stack direction='horizontal' gap='2' className='mb-4'>
                 <h1 className='me-auto'>Budget</h1>
@@ -29,21 +31,22 @@ function Dashboard() {
                 <BudgetCard name='Entertainment' amount={200} max={1000}>
 
                 </BudgetCard>
-                <div>
-                <button onClick={Userfront.logout}>Logout</button> 
+             
 
-                </div>
-
-              </div>
-
-              
+              </div> 
         </Container>
+        <AddBudgetModal show/> 
+        </> 
+        
   
   )}
 }
 
   
+{/* <div>
+<button onClick={Userfront.logout}>Logout</button> 
 
+</div>  */}
   export default Dashboard
 
 

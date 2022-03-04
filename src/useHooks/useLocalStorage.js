@@ -1,4 +1,7 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
+
+// local storage hook to keep budget data on page
+
 export default function useLocalStorage(key, defaultValue){
     const [ value, setValue] = useState(() => {
         const jsonValue= localStorage.getItem(key)

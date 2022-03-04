@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, } from "react"
 import {v4 as uuidv4} from 'uuid'
-
+import useLocalStorage from "../useHooks/useLocalStorage"
 // context api
 const BudgetsContext = React.createContext()
 
@@ -23,8 +23,8 @@ export function useBudgets() {
 
 export const BudgetsProvider = ({children}) => {
     // state to keep track over everything
-    const [budgets, setBudgets]= useState([])
-       const [expenses, setExpenses]= useState([]) 
+    const [budgets, setBudgets]= useLocalStorage('budgets', [])
+       const [expenses, setExpenses]= useLocalStorage('expenses', []) 
 
 // crud commands for updating budget and expenses 
 
