@@ -4,13 +4,16 @@ import Container from 'react-bootstrap/Container'
 import AddBudgetModal from "../AddBudgetModal";
 import BudgetCard from './BudgetCard'
 import {useState} from 'react'
+import ViewExpensesModal from "../ViewExpensesModal copy";
 import BudgetsProvider, { useBudgets } from "../../contexts/BudgetContexts";
 import AddExpenseModal from "../AddExpenseModal";
+import UncategorizedBudgetCard from "../UncategorizedBudgetCard";
 
 
 function Dashboard() {
   const [showaddBudgetModal, setShowAddBudgetModal] = useState(false)
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
+  const [viewExpenseModalBudgetId, setViewExpensesModalBudgetId] = useState()
   const [addExpenseModalBudgetId, setAddExpnseModalBudgetId] = useState()
 
   function openAddExpenseModal(budgetId) {
@@ -54,6 +57,8 @@ function Dashboard() {
                 amount={amount} 
                 max={budget.max}
                 onAddExpenseClick={() => openAddExpenseModal(budget.Id)}
+                onViewExpenseClick={() => setViewExpensesModalBudgetId(budget.Id)}
+
                 
                 />
               )
@@ -67,11 +72,19 @@ function Dashboard() {
 
               </div> 
         </Container>
-        <AddBudgetModal show={showaddBudgetModal} handleClose={() => setShowAddBudgetModal}/> 
+        <AddBudgetModal show={showaddBudgetModal} handleClose={() => setShowAddBudgetModal(false)}/> 
       
         <AddExpenseModal
         show={showAddExpenseModal}
+        defaultBudgetId={addExpenseModalBudgetId}
         handleClose={() =>setShowAddExpenseModal(false) }
+        
+        />
+
+      <ViewExpensesModal
+        budgetId={viewExpenseModalBudgetId}
+        defaultBudgetId={addExpenseModalBudgetId}
+        handleClose={() => setViewExpensesModalBudgetId() }
         
         />
    </>
