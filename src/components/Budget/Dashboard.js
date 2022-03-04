@@ -3,9 +3,13 @@ import {Button, Stack} from 'react-bootstrap'
 import Container from 'react-bootstrap/Container'
 import AddBudgetModal from "../AddBudgetModal";
 import BudgetCard from './BudgetCard'
+import {useState} from 'react'
+import BudgetsProvider, { useBudgets } from "../../contexts/BudgetContexts";
 
 
 function Dashboard() {
+  const [showaddBudgetModal, setShowAddBudgetModal] = useState(false)
+  const {budgets, getBudgetExpenses} = useBudgets()
 
     if(!Userfront.tokens.accessToken){
         return <div classname='warning'> 
@@ -19,8 +23,7 @@ function Dashboard() {
     <Container className='my-4'>
             <Stack direction='horizontal' gap='2' className='mb-4'>
                 <h1 className='me-auto'>Budget</h1>
-                <Button variant='primary'>Add budget</Button>
-                <Button variant = 'primary'></Button>
+                <Button variant='primary' onClick={() => setShowAddBudgetModal(true)}>Add budget</Button>
                 <Button variant = 'outline-primary'>Add expense</Button>
             </Stack>
             <div
@@ -28,14 +31,32 @@ function Dashboard() {
                display: 'grid',
              }}
              >
-                <BudgetCard name='Entertainment' amount={200} max={1000}>
+               {/* mapping through the budget and display the added budgets */}
+               {budgets.map(budget => {
+                 const amount = getBudgetExpenses(budget.id).reduce(
+                   (total, expense) => total + expense.amount, 0
+                 )
 
-                </BudgetCard>
+              return (
+                <BudgetCard 
+                key = {budget.id}
+                name= {budget.name}
+                amount={amount} 
+                max={budget.max}
+                
+                />
+              )
+              })}
+              
+
+                <div>
+                  <button onClick={Userfront.logout}>Logout</button> 
+              </div>  
              
 
               </div> 
         </Container>
-        <AddBudgetModal show/> 
+        <AddBudgetModal show={showaddBudgetModal} handleClose={() => setShowAddBudgetModal}/> 
         </> 
         
   
@@ -43,10 +64,7 @@ function Dashboard() {
 }
 
   
-{/* <div>
-<button onClick={Userfront.logout}>Logout</button> 
 
-</div>  */}
   export default Dashboard
 
 
