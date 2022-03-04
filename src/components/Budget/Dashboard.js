@@ -20,7 +20,7 @@ function Dashboard() {
             </div>
     }else {
   return (
-    <>
+  <>
     <Container className='my-4'>
             <Stack direction='horizontal' gap='2' className='mb-4'>
                 <h1 className='me-auto'>Budget</h1>
@@ -58,9 +58,10 @@ function Dashboard() {
               </div> 
         </Container>
         <AddBudgetModal show={showaddBudgetModal} handleClose={() => setShowAddBudgetModal}/> 
+      
         <AddExpenseModal
-          show={true}/>
-        </> 
+        show={true}/>
+   </>
         
   
   )}
