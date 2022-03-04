@@ -5,6 +5,7 @@ import AddBudgetModal from "../AddBudgetModal";
 import BudgetCard from './BudgetCard'
 import {useState} from 'react'
 import BudgetsProvider, { useBudgets } from "../../contexts/BudgetContexts";
+import AddExpenseModal from "../AddExpenseModal";
 
 
 function Dashboard() {
@@ -57,6 +58,8 @@ function Dashboard() {
               </div> 
         </Container>
         <AddBudgetModal show={showaddBudgetModal} handleClose={() => setShowAddBudgetModal}/> 
+        <AddExpenseModal
+          show={true}/>
         </> 
         
   
