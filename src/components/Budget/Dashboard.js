@@ -10,6 +10,14 @@ import AddExpenseModal from "../AddExpenseModal";
 
 function Dashboard() {
   const [showaddBudgetModal, setShowAddBudgetModal] = useState(false)
+  const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
+  const [addExpenseModalBudgetId, setAddExpnseModalBudgetId] = useState()
+
+  function openAddExpenseModal(budgetId) {
+    setShowAddExpenseModal(true)
+    setAddExpnseModalBudgetId(budgetId)
+  }
+
   const {budgets, getBudgetExpenses} = useBudgets()
 
     if(!Userfront.tokens.accessToken){
@@ -25,7 +33,8 @@ function Dashboard() {
             <Stack direction='horizontal' gap='2' className='mb-4'>
                 <h1 className='me-auto'>Budget</h1>
                 <Button variant='primary' onClick={() => setShowAddBudgetModal(true)}>Add budget</Button>
-                <Button variant = 'outline-primary'>Add expense</Button>
+
+                <Button variant = 'outline-primary'onClick={openAddExpenseModal}>Add expense</Button>
             </Stack>
             <div
              style={{
@@ -44,6 +53,7 @@ function Dashboard() {
                 name= {budget.name}
                 amount={amount} 
                 max={budget.max}
+                onAddExpenseClick={() => openAddExpenseModal(budget.Id)}
                 
                 />
               )
@@ -60,7 +70,10 @@ function Dashboard() {
         <AddBudgetModal show={showaddBudgetModal} handleClose={() => setShowAddBudgetModal}/> 
       
         <AddExpenseModal
-        show={true}/>
+        show={showAddExpenseModal}
+        handleClose={() =>setShowAddExpenseModal(false) }
+        
+        />
    </>
         
   
