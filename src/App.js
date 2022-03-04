@@ -11,6 +11,7 @@ import RequireAuth from './auth/RequireAuth'
 import BudgetCard from "./components/Budget/BudgetCard";
 
 
+
 export default function App() {
   return (
     <Router>

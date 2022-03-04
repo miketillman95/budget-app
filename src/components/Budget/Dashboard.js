@@ -16,14 +16,25 @@ function Dashboard() {
   return (
     <Container className='my-4'>
             <Stack direction='horizontal' gap='2' className='mb-4'>
-                <h1 className='me-auto'>Budgets</h1>
+                <h1 className='me-auto'>Budget</h1>
                 <Button variant='primary'>Add budget</Button>
                 <Button variant = 'primary'></Button>
                 <Button variant = 'outline-primary'>Add expense</Button>
             </Stack>
-                <BudgetCard>
+            <div
+             style={{
+               display: 'grid',
+             }}
+             >
+                <BudgetCard name='Entertainment' amount={200} max={1000}>
 
                 </BudgetCard>
+                <div>
+                <button onClick={Userfront.logout}>Logout</button> 
+
+                </div>
+
+              </div>
 
               
         </Container>
@@ -36,4 +47,3 @@ function Dashboard() {
   export default Dashboard
 
 
-        /* <button onClick={Userfront.logout}>Logout</button> */
