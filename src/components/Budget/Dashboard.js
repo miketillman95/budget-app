@@ -5,7 +5,7 @@ import AddBudgetModal from "../AddBudgetModal";
 import BudgetCard from './BudgetCard'
 import {useState} from 'react'
 import ViewExpensesModal from "../ViewExpensesModal copy";
-import BudgetsProvider, { useBudgets } from "../../contexts/BudgetContexts";
+import BudgetsProvider, {UNCATEGORIZED_BUDGET_ID, useBudgets } from "../../contexts/BudgetContexts";
 import AddExpenseModal from "../AddExpenseModal";
 import UncategorizedBudgetCard from "../UncategorizedBudgetCard";
 
@@ -63,6 +63,12 @@ function Dashboard() {
                 />
               )
               })}
+               <UncategorizedBudgetCard
+            onAddExpenseClick={openAddExpenseModal}
+            onViewExpensesClick={() =>
+              setViewExpensesModalBudgetId(UNCATEGORIZED_BUDGET_ID)
+            }
+          />
               
 
                 <div>
@@ -83,7 +89,7 @@ function Dashboard() {
 
       <ViewExpensesModal
         budgetId={viewExpenseModalBudgetId}
-        defaultBudgetId={addExpenseModalBudgetId}
+        // defaultBudgetId={addExpenseModalBudgetId}
         handleClose={() => setViewExpensesModalBudgetId() }
         
         />
